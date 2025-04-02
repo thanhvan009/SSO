@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Login';
+import Login from './components/Login/Login';
 import ProtectedRoute from './ProtectedRoute';
-import Dashboard from './Dashboard';
-import Callback from './Callback';
+import Dashboard from './components/Dashboard/Dashboard';
+import Callback from './components/Callback/Callback';
 import { useState } from 'react';
 
 
