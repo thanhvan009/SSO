@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
-import { mockLogin, mockBackend } from "./utils/mockAuthAPI";
-import { mockIDP } from './utils/mockIDP'
+import { verifyCredentials, mockLogin, validateIdPToken } from "./utils/mockAuthAPI";
 
 const Login = ({ setIsAuthenticated }) => {
     const navigate = useNavigate();
@@ -10,18 +9,18 @@ const Login = ({ setIsAuthenticated }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         try {
             // Verify with mock IDP
-            const idpResponse = await mockIDP.verifyCredentials(username, password);
+            const idpResponse = await verifyCredentials(username, password);
+            const res = await mockLogin(username, password);
+            console.log("🚀 ~ handleSubmit ~ res:", res)
             if (idpResponse.verified) {
-
                 // Send IDP token to backend
-                const response = await mockBackend.validateIdPToken(idpResponse.idpToken);
+                const response = await validateIdPToken(idpResponse.idpToken);
                 if (response.redirect) {
                     window.location.href = response.redirect;
                 } else {

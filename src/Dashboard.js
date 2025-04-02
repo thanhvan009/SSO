@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { mockFetchData } from "./utils/mockDataAPI";
+import { mockFetchData } from "./utils/mockAuthAPI";
 
 const Dashboard = () => {
     const navigate = useNavigate();
